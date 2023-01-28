@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class PresencesTable extends Component
 {
-    public $firstDayOfWeek;
+    public CarbonImmutable $firstDayOfWeek;
 
     public function mount(): void
     {
@@ -21,5 +22,15 @@ class PresencesTable extends Component
             'me' => auth()->user(),
             'otherUsers' => User::all()
         ]);
+    }
+
+    public function nextWeek(): void
+    {
+        $this->firstDayOfWeek = $this->firstDayOfWeek->addWeek();
+    }
+
+    public function previousWeek(): void
+    {
+        $this->firstDayOfWeek = $this->firstDayOfWeek->subWeek();
     }
 }

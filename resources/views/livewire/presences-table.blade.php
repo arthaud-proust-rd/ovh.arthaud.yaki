@@ -1,5 +1,8 @@
 <section class="flex flex-col">
-
+    <section>
+        <button wire:click="previousWeek()">Précédent</button>
+        <button wire:click="nextWeek()">Suivant</button>
+    </section>
     <section class="grid grid-cols-8">
         <span>{{$me->name }}</span>
         @foreach($me->presences()->ofWeekBeginningAt($this->firstDayOfWeek)->get() as $presence)
