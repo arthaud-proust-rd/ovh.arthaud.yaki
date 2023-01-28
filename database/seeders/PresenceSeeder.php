@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Presence;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PresenceSeeder extends Seeder
@@ -17,9 +16,9 @@ class PresenceSeeder extends Seeder
     public function run()
     {
         foreach (User::cursor() as $user) {
-            $date = now();
+            $date = now()->subWeek();
 
-            for($i = 0; $i<30; $i++) {
+            for ($i = 0; $i < 30; $i++) {
                 Presence::factory()
                     ->for($user)
                     ->create([
