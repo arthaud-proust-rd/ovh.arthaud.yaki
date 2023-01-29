@@ -61,4 +61,9 @@ class PresencesTable extends Component
     {
         return CarbonPeriod::create($this->firstDayOfWeek->copy(), '1 day', 7);
     }
+
+    public function getLastDayOfWeekProperty(): CarbonImmutable
+    {
+        return $this->firstDayOfWeek->addDays(6);
+    }
 }

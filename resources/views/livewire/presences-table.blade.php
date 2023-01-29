@@ -1,14 +1,18 @@
 <section class="px-4 flex flex-col overflow-auto ">
     <div class="sticky top-0 bg-white z-40 w-min">
         <section class="presence-row">
-            <div class="grid grid-cols-2 pr-2">
+            <div class="grid grid-cols-4 pr-2">
                 <button wire:click="previousWeek()"
-                        class="p-2 flex items-center justify-center rounded-md hover:bg-gray-100">
-                    <x-heroicon-o-chevron-double-left class="icon"/>
+                        class="col-span-1 p-2 flex items-center justify-center rounded-md hover:bg-gray-100">
+                    <x-heroicon-o-chevron-double-left/>
                 </button>
+                <section class="col-span-2 flex flex-col justify-center items-center ">
+                    <span>{{ $firstDayOfWeek->translatedFormat('M') }}</span>
+                    <span>{{ $firstDayOfWeek->day }}-{{ $this->lastDayOfWeek->day }}</span>
+                </section>
                 <button wire:click="nextWeek()"
-                        class="p-2 flex items-center justify-center rounded-md hover:bg-gray-100">
-                    <x-heroicon-o-chevron-double-right class="icon"/>
+                        class="col-span-1 p-2 flex items-center justify-center rounded-md hover:bg-gray-100">
+                    <x-heroicon-o-chevron-double-right/>
                 </button>
             </div>
             @foreach($this->daysOfWeek as $day)
