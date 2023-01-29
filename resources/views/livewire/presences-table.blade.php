@@ -30,8 +30,8 @@
                 Total
             </section>
 
-            @foreach($dayCounts as $dayCount)
-                <x-presence-resume :count="$dayCount"/>
+            @foreach($this->daysOfWeek as $day)
+                <livewire:presence-resume :day="$day" :wire:key="'resume-'.Str::orderedUuid()"/>
             @endforeach
         </section>
     </div>

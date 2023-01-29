@@ -13,10 +13,6 @@ class PresencesTable extends Component
 {
     public CarbonImmutable $firstDayOfWeek;
 
-    protected $listeners = [
-        'presenceUpdated' => 'render'
-    ];
-
     public function mount(): void
     {
         $this->firstDayOfWeek = now()->toImmutable()->startOfWeek();
@@ -54,18 +50,11 @@ class PresencesTable extends Component
     public function nextWeek(): void
     {
         $this->firstDayOfWeek = $this->firstDayOfWeek->addWeek();
-        $this->emitFirstDayOfWeekUpdated();
-    }
-
-    public function emitFirstDayOfWeekUpdated(): void
-    {
-        $this->emit('firstDayOfWeekUpdated', $this->firstDayOfWeek);
     }
 
     public function previousWeek(): void
     {
         $this->firstDayOfWeek = $this->firstDayOfWeek->subWeek();
-        $this->emitFirstDayOfWeekUpdated();
     }
 
     public function getDaysOfWeekProperty(): CarbonPeriod
