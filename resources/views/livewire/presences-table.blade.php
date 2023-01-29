@@ -24,7 +24,7 @@
                 </section>
             @endforeach
         </section>
-        <section class="presence-row mb-2 rounded-xl shadow-lg">
+        <section class="presence-row self-presence-row mb-2 rounded-xl shadow-lg">
             <section class="p-4 flex justify-center flex-col gap-2">
                 <span>{{$me->name }}</span>
                 <section class="grid grid-rows-2 gap-1">

@@ -35,4 +35,8 @@
     .presence-ceil.button {
         @apply opacity-0 text-white focus-visible:opacity-100 hover:opacity-100 bg-gray-400/90;
     }
+
+    /*.button-hint .presence-ceil.button {*/
+    /*    @apply opacity-70 animate-pulse;*/
+    /*}*/
 }

@@ -102,4 +102,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(DefaultPresence::class);
     }
+
+    public function getAreDefaultPresencesEmptyAttribute(): bool
+    {
+        return !$this->defaultPresences->count();
+    }
 }

@@ -30,7 +30,8 @@
         @endif
     </div>
     @can('update', $presence)
-        <div class="px-2 py-4 absolute inset-0 grid grid-rows-3 grid-cols-presence-action gap-1">
+        <div
+            class="px-2 py-4 absolute inset-0 grid grid-rows-3 grid-cols-presence-action gap-1 @if(!$presence->exists) button-hint @endif">
             <button wire:click="toggleAll()" class="presence-ceil row-span-3 col-span-1 button">
                 <x-heroicon-o-arrow-path class="icon"/>
             </button>
