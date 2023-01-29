@@ -44,6 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return Presence[]
+     */
     public function presencesOfWeek(CarbonPeriod $daysOfWeek): array
     {
         $presences = [];

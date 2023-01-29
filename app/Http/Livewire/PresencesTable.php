@@ -63,6 +63,41 @@ class PresencesTable extends Component
         $this->firstDayOfWeek = $this->firstDayOfWeek->subWeek();
     }
 
+    public function fillWithDefaultWeek(): void
+    {
+        $me = auth()->user();
+        foreach ($me->presencesOfWeek($this->daysOfWeek) as $presence) {
+            $defaultPresence = $me->defaultPresences()->firstWhere('day_of_week', $presence->date->dayOfWeek);
+
+            if (!$defaultPresence) {
+                continue;
+            }
+
+            if (!$presence->exists) {
+                $presence->user_id = $me->id;
+                $presence->eat_midday_at_home = $defaultPresence->eat_midday_at_home;
+                $presence->eat_evening_at_home = $defaultPresence->eat_evening_at_home;
+                $presence->sleep_at_home = $defaultPresence->sleep_at_home;
+                $presence->save();
+            } else {
+                $presence->update([
+                    'eat_midday_at_home' => $defaultPresence->eat_midday_at_home,
+                    'eat_evening_at_home' => $defaultPresence->eat_evening_at_home,
+                    'sleep_at_home' => $defaultPresence->sleep_at_home
+                ]);
+            }
+        }
+
+    }
+
+    public function clearWeek(): void
+    {
+        $me = auth()->user();
+        foreach ($me->presencesOfWeek($this->daysOfWeek) as $presence) {
+            $presence->delete();
+        }
+    }
+
     public function getDaysOfWeekProperty(): CarbonPeriod
     {
         return CarbonPeriod::create($this->firstDayOfWeek->copy(), '1 day', 7);

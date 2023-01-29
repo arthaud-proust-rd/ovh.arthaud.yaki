@@ -25,7 +25,24 @@
             @endforeach
         </section>
         <section class="presence-row mb-2 rounded-xl shadow-lg">
-            <span class="p-4 flex items-center">{{$me->name }}</span>
+            <section class="p-4 flex justify-center flex-col gap-2">
+                <span>{{$me->name }}</span>
+                <section class="grid grid-rows-2 gap-1">
+                    <button
+                        class="col-span-1 -ml-2 p-2 flex gap-1 items-center justify-start rounded-md hover:bg-gray-100"
+                        wire:click="fillWithDefaultWeek()"
+                        title="Remplir avec la semaine type">
+                        <x-heroicon-o-calendar-days class="icon"/>
+                        <span>Remplir</span>
+                    </button>
+                    <button
+                        class="col-span-1 -ml-2 p-2 flex gap-1 items-center justify-start rounded-md hover:bg-gray-100"
+                        wire:click="clearWeek()">
+                        <x-heroicon-o-calendar class="icon"/>
+                        <span>Vider</span>
+                    </button>
+                </section>
+            </section>
             @foreach($me->presencesOfWeek($this->daysOfWeek) as $presence)
                 <livewire:presence-card :user="$me" :presence="$presence"
                                         :wire:key="'presence-'.Str::orderedUuid()"/>
