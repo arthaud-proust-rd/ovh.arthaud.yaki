@@ -12,6 +12,7 @@ php artisan down
 # update source code
 git fetch origin
 git reset --hard HEAD
+git checkout origin/release/staging
 
 # update PHP dependencies
 composer install --no-interaction --prefer-dist
