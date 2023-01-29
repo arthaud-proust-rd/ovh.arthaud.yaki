@@ -71,4 +71,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(Presence::class);
     }
+
+    public function defaultPresencesOfWeek(CarbonPeriod $daysOfWeek): array
+    {
+        $defaultPresences = [];
+
+        foreach ($daysOfWeek as $day) {
+            $dayName = $day->getTranslatedDayName();
+            $defaultPresence = $this->defaultPresences()->firstWhere([
+                'day' => $dayName
+            ]);
+
+            if (!$defaultPresence) {
+                $defaultPresence = new DefaultPresence([
+                    'day' => $dayName,
+                    'user_id' => $this->id
+                ]);
+            }
+
+            $defaultPresences[] = $defaultPresence;
+        }
+
+        return $defaultPresences;
+    }
+
+    public function defaultPresences(): HasMany
+    {
+        return $this->hasMany(DefaultPresence::class);
+    }
 }
