@@ -1,4 +1,4 @@
-<section class="px-4 flex flex-col h-screen overflow-auto ">
+<section class="px-4 flex flex-col overflow-auto ">
     <div class="sticky top-0 bg-white z-40 w-min">
         <section class="presence-row">
             <div class="grid grid-cols-2 pr-2">
@@ -27,7 +27,7 @@
         <section class="presence-row">
             <span class="mt-4 px-4 flex items-center">Total</span>
             @foreach($this->daysOfWeek as $day)
-                <livewire:presence-resume :day="$day"/>
+                <livewire:presence-resume :day="$day" :wire:key="'resume-'.Str::orderedUuid()"/>
             @endforeach
         </section>
     </div>

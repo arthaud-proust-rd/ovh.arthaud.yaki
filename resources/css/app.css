@@ -9,7 +9,7 @@
     }
 
     .presence-row {
-        @apply w-min px-4 grid grid-cols-presence divide-x divide-dashed;
+        @apply w-min px-4 grid grid-cols-presences divide-x divide-dashed;
     }
 
     .ceil {
