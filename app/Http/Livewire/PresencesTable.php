@@ -27,8 +27,12 @@ class PresencesTable extends Component
         for ($i = 0; $i < 7; $i++) {
             $date = $this->firstDayOfWeek->addDays($i)->toDateString();
 
-            $eat = Presence::where('date', $date)
-                ->where('eat_at_home', true)
+            $eatMidday = Presence::where('date', $date)
+                ->where('eat_midday_at_home', true)
+                ->count();
+
+            $eatEvening = Presence::where('date', $date)
+                ->where('eat_evening_at_home', true)
                 ->count();
 
             $sleep = Presence::where('date', $date)
@@ -36,7 +40,8 @@ class PresencesTable extends Component
                 ->count();
 
             $dayCounts[] = [
-                'eat' => $eat,
+                'eat_midday' => $eatMidday,
+                'eat_evening' => $eatEvening,
                 'sleep' => $sleep
             ];
         }

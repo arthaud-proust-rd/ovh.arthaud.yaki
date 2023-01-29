@@ -20,7 +20,8 @@ class PresenceFactory extends Factory
         return [
             'user_id' => User::inRandomOrder()->firstOrFail(),
             'date' => fake()->date(),
-            'eat_at_home' => fake()->boolean(),
+            'eat_midday_at_home' => fake()->boolean(),
+            'eat_evening_at_home' => fake()->boolean(),
             'sleep_at_home' => fake()->boolean(),
         ];
     }

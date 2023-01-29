@@ -20,10 +20,17 @@ class PresenceResume extends Component
         return view('livewire.presence-resume');
     }
 
-    public function getEatCountProperty(): int
+    public function getEatMiddayCountProperty(): int
     {
         return Presence::where('date', $this->day)
-            ->where('eat_at_home', true)
+            ->where('eat_midday_at_home', true)
+            ->count();
+    }
+
+    public function getEatEveningCountProperty(): int
+    {
+        return Presence::where('date', $this->day)
+            ->where('eat_evening_at_home', true)
             ->count();
     }
 

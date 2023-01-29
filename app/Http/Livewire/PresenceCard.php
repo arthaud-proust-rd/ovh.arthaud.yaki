@@ -27,7 +27,7 @@ class PresenceCard extends Component
         return view('livewire.presence-card');
     }
 
-    public function toggleEat(): void
+    public function toggleEatMidday(): void
     {
         $this->updatePresenceResume();
 
@@ -39,7 +39,7 @@ class PresenceCard extends Component
         Gate::authorize('update', $this->presence);
 
         $this->presence->update([
-            'eat_at_home' => !$this->presence->eat_at_home
+            'eat_midday_at_home' => !$this->presence->eat_midday_at_home
         ]);
     }
 
@@ -56,6 +56,22 @@ class PresenceCard extends Component
         $this->presence->save();
     }
 
+    public function toggleEatEvening(): void
+    {
+        $this->updatePresenceResume();
+
+        if (!$this->presence->exists) {
+            $this->createPresence();
+            return;
+        }
+
+        Gate::authorize('update', $this->presence);
+
+        $this->presence->update([
+            'eat_evening_at_home' => !$this->presence->eat_evening_at_home
+        ]);
+    }
+
     public function toggleAll(): void
     {
         $this->updatePresenceResume();
@@ -68,7 +84,8 @@ class PresenceCard extends Component
         Gate::authorize('update', $this->presence);
 
         $this->presence->update([
-            'eat_at_home' => !$this->presence->eat_at_home,
+            'eat_midday_at_home' => !$this->presence->eat_midday_at_home,
+            'eat_evening_at_home' => !$this->presence->eat_evening_at_home,
             'sleep_at_home' => !$this->presence->sleep_at_home
         ]);
     }

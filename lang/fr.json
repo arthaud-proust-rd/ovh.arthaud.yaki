@@ -1,4 +1,5 @@
 {
-    "resume_count_eat": ":count mange|:count mangent",
+    "resume_count_eat_midday": ":count déjeune|:count déjeunent",
+    "resume_count_eat_evening": ":count dîne|:count dînent",
     "resume_count_sleep": ":count dors|:count dorment"
 }
