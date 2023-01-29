@@ -25,11 +25,11 @@
     }
 
     .presence-ceil.present {
-        @apply bg-blue-200;
+        @apply bg-blue-200 text-blue-800;
     }
 
     .presence-ceil.absent {
-        @apply bg-gray-100;
+        @apply bg-gray-100 text-gray-800;
     }
 
     .presence-ceil.button {
