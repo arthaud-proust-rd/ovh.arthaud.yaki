@@ -27,4 +27,8 @@
     .presence-ceil.absent {
         @apply bg-gray-100;
     }
+
+    .presence-ceil.button {
+        @apply hover:bg-gray-100/80;
+    }
 }
