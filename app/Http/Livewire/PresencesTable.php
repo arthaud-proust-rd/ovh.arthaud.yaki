@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Presence;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
@@ -12,6 +13,10 @@ class PresencesTable extends Component
 {
     public CarbonImmutable $firstDayOfWeek;
 
+    protected $listeners = [
+        'presenceUpdated' => 'render'
+    ];
+
     public function mount(): void
     {
         $this->firstDayOfWeek = now()->toImmutable()->startOfWeek();
@@ -20,20 +25,47 @@ class PresencesTable extends Component
     public function render(): View
     {
         $me = auth()->user();
+
+        $dayCounts = [];
+        for ($i = 0; $i < 7; $i++) {
+            $date = $this->firstDayOfWeek->addDays($i)->toDateString();
+
+            $eat = Presence::where('date', $date)
+                ->where('eat_at_home', true)
+                ->count();
+
+            $sleep = Presence::where('date', $date)
+                ->where('sleep_at_home', true)
+                ->count();
+
+            $dayCounts[] = [
+                'eat' => $eat,
+                'sleep' => $sleep
+            ];
+        }
+
         return view('livewire.presences-table', [
             'me' => $me,
-            'otherUsers' => User::whereNot('id', $me->id)->get()
+            'otherUsers' => User::whereNot('id', $me->id)->get(),
+            'dayCounts' => $dayCounts,
         ]);
     }
 
     public function nextWeek(): void
     {
         $this->firstDayOfWeek = $this->firstDayOfWeek->addWeek();
+        $this->emitFirstDayOfWeekUpdated();
+    }
+
+    public function emitFirstDayOfWeekUpdated(): void
+    {
+        $this->emit('firstDayOfWeekUpdated', $this->firstDayOfWeek);
     }
 
     public function previousWeek(): void
     {
         $this->firstDayOfWeek = $this->firstDayOfWeek->subWeek();
+        $this->emitFirstDayOfWeekUpdated();
     }
 
     public function getDaysOfWeekProperty(): CarbonPeriod

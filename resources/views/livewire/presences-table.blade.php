@@ -24,10 +24,14 @@
                 <livewire:presence-card :user="$me" :presence="$presence" :wire:key="'presence-'.Str::orderedUuid()"/>
             @endforeach
         </section>
+
         <section class="presence-row">
-            <span class="mt-4 px-4 flex items-center">Total</span>
-            @foreach($this->daysOfWeek as $day)
-                <livewire:presence-resume :day="$day" :wire:key="'resume-'.Str::orderedUuid()"/>
+            <section class="pt-6 pb-4 px-2 flex items-center font-bold">
+                Total
+            </section>
+
+            @foreach($dayCounts as $dayCount)
+                <x-presence-resume :count="$dayCount"/>
             @endforeach
         </section>
     </div>
