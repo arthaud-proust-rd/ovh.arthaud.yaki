@@ -13,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            gridTemplateColumns: {
+                'presence': 'repeat(8, minmax(9rem, 1fr))',
+            }
         },
     },
 

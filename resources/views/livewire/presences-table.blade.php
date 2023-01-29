@@ -1,9 +1,5 @@
-<section class="px-4">
-    <div class="sticky top-0">
-
-        <section>
-
-        </section>
+<section class="px-4 flex flex-col h-screen overflow-auto ">
+    <div class="sticky top-0 bg-white z-40 w-min">
         <section class="presence-row">
             <div class="grid grid-cols-2 pr-2">
                 <button wire:click="previousWeek()"
@@ -22,7 +18,7 @@
                 </div>
             @endforeach
         </section>
-        <section class="presence-row mb-2 overflow-hidden rounded-xl shadow-lg">
+        <section class="presence-row mb-2 rounded-xl shadow-lg">
             <span class="p-4 flex items-center">{{$me->name }}</span>
             @foreach($me->presences()->ofWeekBeginningAt($this->firstDayOfWeek)->get() as $presence)
                 <livewire:presence-card :user="$me" :presence="$presence" :wire:key="'presence-'.$presence->id"/>
