@@ -20,6 +20,10 @@
         @apply ceil rounded-md;
     }
 
+    .presence-ceil.unfilled {
+        @apply border border-dashed;
+    }
+
     .presence-ceil.present {
         @apply bg-blue-200;
     }

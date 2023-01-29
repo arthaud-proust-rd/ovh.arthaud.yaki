@@ -15,11 +15,13 @@ return new class extends Migration {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->date('date');
+
+            $table->unique(['user_id', 'date']);
 
             $table->boolean('sleep_at_home');
             $table->boolean('eat_at_home');
 
-            $table->date('date');
 
             $table->timestamps();
         });

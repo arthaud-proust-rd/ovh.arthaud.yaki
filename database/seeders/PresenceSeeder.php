@@ -16,9 +16,9 @@ class PresenceSeeder extends Seeder
     public function run()
     {
         foreach (User::cursor() as $user) {
-            $date = now()->subWeek();
+            $date = now();
 
-            for ($i = 0; $i < 30; $i++) {
+            for ($i = 0; $i < 1; $i++) {
                 Presence::factory()
                     ->for($user)
                     ->create([

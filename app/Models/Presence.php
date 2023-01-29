@@ -12,6 +12,11 @@ class Presence extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'sleep_at_home' => false,
+        'eat_at_home' => false
+    ];
+
     protected $fillable = [
         'user_id',
         'date',

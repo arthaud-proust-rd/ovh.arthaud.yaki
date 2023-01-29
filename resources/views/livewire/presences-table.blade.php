@@ -20,8 +20,8 @@
         </section>
         <section class="presence-row mb-2 rounded-xl shadow-lg">
             <span class="p-4 flex items-center">{{$me->name }}</span>
-            @foreach($me->presences()->ofWeekBeginningAt($this->firstDayOfWeek)->get() as $presence)
-                <livewire:presence-card :user="$me" :presence="$presence" :wire:key="'presence-'.$presence->id"/>
+            @foreach($me->presencesOfWeek($this->daysOfWeek) as $presence)
+                <livewire:presence-card :user="$me" :presence="$presence" :wire:key="'presence-'.Str::orderedUuid()"/>
             @endforeach
         </section>
         <section class="presence-row">
@@ -38,8 +38,9 @@
     @foreach($otherUsers as $user)
         <section class="presence-row">
             <span class="p-4 flex items-center">{{$user->name }}</span>
-            @foreach($user->presences()->ofWeekBeginningAt($this->firstDayOfWeek)->get() as $presence)
-                <livewire:presence-card :user="$user" :presence="$presence" :wire:key="'presence-'.$presence->id"/>
+            @foreach($user->presencesOfWeek($this->daysOfWeek) as $presence)
+                <livewire:presence-card :user="$user" :presence="$presence"
+                                        :wire:key="'presence-'.Str::orderedUuid()"/>
             @endforeach
         </section>
     @endforeach

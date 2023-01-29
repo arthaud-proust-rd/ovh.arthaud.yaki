@@ -20,9 +20,10 @@ class PresencesTable extends Component
 
     public function render(): View
     {
+        $me = auth()->user();
         return view('livewire.presences-table', [
-            'me' => auth()->user(),
-            'otherUsers' => User::all()
+            'me' => $me,
+            'otherUsers' => User::whereNot('id', $me->id)->get()
         ]);
     }
 

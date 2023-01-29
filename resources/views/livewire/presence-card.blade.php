@@ -1,6 +1,8 @@
 <section class="px-2 py-4 relative">
     <div class="h-16 grid grid-rows-2 gap-1">
-        @if(!$presence || (!$presence->eat_at_home && !$presence->sleep_at_home))
+        @if(!$presence->exists)
+            <span class="row-start-1 row-end-3 presence-ceil @can('update', $presence) unfilled @endif"></span>
+        @elseif(!$presence->eat_at_home && !$presence->sleep_at_home)
             <span class="row-start-1 row-end-3 presence-ceil absent">Absent</span>
         @elseif($presence->eat_at_home && $presence->sleep_at_home)
             <span class="row-start-1 row-end-3 presence-ceil present">Présent</span>
@@ -21,9 +23,12 @@
         @endif
     </div>
     @can('update', $presence)
-        <div class="px-2 py-4 absolute inset-0 grid grid-rows-2 gap-1">
-            <button wire:click="toggleEat()" class="presence-ceil button"></button>
-            <button wire:click="toggleSleep()" class="presence-ceil button"></button>
+        <div class="px-2 py-4 absolute inset-0 grid grid-rows-2 grid-cols-2 gap-1">
+            <button wire:click="toggleAll()" class="presence-ceil row-span-2 col-span-1 button">
+
+            </button>
+            <button wire:click="toggleEat()" class="presence-ceil col-span-1 button"></button>
+            <button wire:click="toggleSleep()" class="presence-ceil col-span-1 button"></button>
         </div>
     @endif
 </section>
