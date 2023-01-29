@@ -10,7 +10,8 @@ export HOME
 php artisan down
 
 # update source code
-git checkout origin/release/staging
+git fetch origin
+git reset --hard HEAD
 
 # update PHP dependencies
 composer install --no-interaction --prefer-dist
