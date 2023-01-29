@@ -15,9 +15,9 @@ return new class extends Migration {
         Schema::create('default_presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('day');
+            $table->unsignedSmallInteger('day_of_week');
 
-            $table->unique(['user_id', 'day']);
+            $table->unique(['user_id', 'day_of_week']);
 
             $table->boolean('sleep_at_home');
             $table->boolean('eat_evening_at_home');

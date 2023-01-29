@@ -77,14 +77,14 @@ class User extends Authenticatable
         $defaultPresences = [];
 
         foreach ($daysOfWeek as $day) {
-            $dayName = $day->getTranslatedDayName();
+            $dayOfWeek = $day->dayOfWeek;
             $defaultPresence = $this->defaultPresences()->firstWhere([
-                'day' => $dayName
+                'day_of_week' => $dayOfWeek
             ]);
 
             if (!$defaultPresence) {
                 $defaultPresence = new DefaultPresence([
-                    'day' => $dayName,
+                    'day_of_week' => $dayOfWeek,
                     'user_id' => $this->id
                 ]);
             }

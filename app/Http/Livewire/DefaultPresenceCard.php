@@ -12,13 +12,13 @@ class DefaultPresenceCard extends Component
 {
     public User $user;
     public DefaultPresence $defaultPresence;
-    public string $day;
+    public int $dayOfWeek;
 
     public function mount(User $user, DefaultPresence $defaultPresence): void
     {
         $this->user = $user;
         $this->defaultPresence = $defaultPresence;
-        $this->day = $defaultPresence->day;
+        $this->dayOfWeek = $defaultPresence->day_of_week;
     }
 
     public function render(): View
@@ -45,7 +45,7 @@ class DefaultPresenceCard extends Component
     public function createDefaultPresence(): void
     {
         $this->defaultPresence->user_id = $this->user->id;
-        $this->defaultPresence->day = $this->day;
+        $this->defaultPresence->day_of_week = $this->dayOfWeek;
 
         $this->defaultPresence->save();
     }
