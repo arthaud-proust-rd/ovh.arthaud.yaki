@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Presence;
 use App\Models\User;
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonPeriod;
 use Illuminate\Contracts\View\View;
@@ -15,7 +16,7 @@ class PresencesTable extends Component
 
     public function mount(): void
     {
-        $this->firstDayOfWeek = now()->toImmutable()->startOfWeek();
+        $this->firstDayOfWeek = now()->toImmutable()->startOfWeek(Carbon::FRIDAY);
     }
 
     public function render(): View
