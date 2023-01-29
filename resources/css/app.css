@@ -33,6 +33,6 @@
     }
 
     .presence-ceil.button {
-        @apply hover:bg-gray-100/80;
+        @apply opacity-0 text-white focus-visible:opacity-100 hover:opacity-100 bg-gray-400/90;
     }
 }

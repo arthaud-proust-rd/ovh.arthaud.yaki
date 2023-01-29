@@ -29,6 +29,8 @@ class PresenceCard extends Component
 
     public function toggleEat(): void
     {
+        $this->updatePresenceResume();
+
         if (!$this->presence->exists) {
             $this->createPresence();
             return;
@@ -41,6 +43,11 @@ class PresenceCard extends Component
         ]);
     }
 
+    public function updatePresenceResume(): void
+    {
+        $this->emit('presenceUpdated');
+    }
+
     public function createPresence(): void
     {
         $this->presence->user_id = $this->user->id;
@@ -51,6 +58,8 @@ class PresenceCard extends Component
 
     public function toggleAll(): void
     {
+        $this->updatePresenceResume();
+
         if (!$this->presence->exists) {
             $this->createPresence();
             return;
@@ -66,11 +75,13 @@ class PresenceCard extends Component
 
     public function toggleSleep(): void
     {
+        $this->updatePresenceResume();
+
         if (!$this->presence->exists) {
             $this->createPresence();
             return;
         }
-        
+
         Gate::authorize('update', $this->presence);
 
         $this->presence->update([

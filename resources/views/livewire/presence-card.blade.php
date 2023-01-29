@@ -25,10 +25,22 @@
     @can('update', $presence)
         <div class="px-2 py-4 absolute inset-0 grid grid-rows-2 grid-cols-2 gap-1">
             <button wire:click="toggleAll()" class="presence-ceil row-span-2 col-span-1 button">
-
+                <x-heroicon-o-arrow-path class="icon"/>
             </button>
-            <button wire:click="toggleEat()" class="presence-ceil col-span-1 button"></button>
-            <button wire:click="toggleSleep()" class="presence-ceil col-span-1 button"></button>
+            <button wire:click="toggleEat()" class="presence-ceil col-span-1 button">
+                @if($presence->eat_at_home)
+                    Absent
+                @else
+                    Mange
+                @endif
+            </button>
+            <button wire:click="toggleSleep()" class="presence-ceil col-span-1 button">
+                @if($presence->sleep_at_home)
+                    Absent
+                @else
+                    Dors
+                @endif
+            </button>
         </div>
     @endif
 </section>

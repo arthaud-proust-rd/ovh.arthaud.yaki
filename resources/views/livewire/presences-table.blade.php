@@ -26,11 +26,8 @@
         </section>
         <section class="presence-row">
             <span class="mt-4 px-4 flex items-center">Total</span>
-            @foreach($this->daysCount as $dayCount)
-                <div class="ceil flex-col pt-6 pb-4">
-                    <span>{{ $dayCount['eat'] }} mangent</span>
-                    <span>{{ $dayCount['sleep'] }} dorment</span>
-                </div>
+            @foreach($this->daysOfWeek as $day)
+                <livewire:presence-resume :day="$day"/>
             @endforeach
         </section>
     </div>
