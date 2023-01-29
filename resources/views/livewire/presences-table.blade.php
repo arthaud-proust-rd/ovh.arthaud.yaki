@@ -12,16 +12,19 @@
                 </button>
             </div>
             @foreach($this->daysOfWeek as $day)
-                <div class="ceil flex-col">
-                    <span>{{ $day->translatedFormat('l') }}</span>
-                    <span>{{ $day->translatedFormat('d') }}</span>
-                </div>
+                <section class="px-2">
+                    <div class="presence-ceil flex-col p-2 @if($day->isToday()) font-bold text-blue-600 @endif">
+                        <span>{{ $day->translatedFormat('l') }}</span>
+                        <span>{{ $day->translatedFormat('d') }}</span>
+                    </div>
+                </section>
             @endforeach
         </section>
         <section class="presence-row mb-2 rounded-xl shadow-lg">
             <span class="p-4 flex items-center">{{$me->name }}</span>
             @foreach($me->presencesOfWeek($this->daysOfWeek) as $presence)
-                <livewire:presence-card :user="$me" :presence="$presence" :wire:key="'presence-'.Str::orderedUuid()"/>
+                <livewire:presence-card :user="$me" :presence="$presence"
+                                        :wire:key="'presence-'.Str::orderedUuid()"/>
             @endforeach
         </section>
 
